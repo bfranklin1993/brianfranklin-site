@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books I've Read | Brian Franklin</title>
+  <link rel="icon" type="image/png" href="/images/profile-photo.png">
+  <link rel="apple-touch-icon" href="/images/profile-photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Urbanist', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    width: 100%;
+    max-width: 900px;
+    padding: 60px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin: 40px 0;
+  }
+  a { color: darkorange; text-decoration: none; transition: opacity 0.2s ease; }
+  a:hover { opacity: 0.75; }
+  .home-link {
+    display: inline-block;
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 1.05rem;
+  }
+  .home-link:hover { color: darkorange; opacity: 1; }
+  @media (max-width: 768px) {
+    .container { padding: 40px; margin: 20px; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 25px; }
+  }
+
+  .page-header { margin-bottom: 50px; text-align: center; }
+  .page-title {
+    font-size: 2.5rem; font-weight: 700;
+    color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
+  }
+  .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .year-section { margin-bottom: 50px; }
+  .year-heading {
+    font-size: 1.3rem; color: #41B6E6; margin-bottom: 20px;
+    letter-spacing: 0.05em; font-weight: 600;
+  }
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 28px;
+  }
+  .book {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+  }
+  .book-cover {
+    width: 100%; aspect-ratio: 2 / 3;
+    background: #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
+    transition: transform 0.2s ease;
+  }
+  .book:hover .book-cover { transform: translateY(-3px); }
+  .book-title {
+    font-size: 0.95rem; font-weight: 600; color: #fff;
+    margin-bottom: 2px; line-height: 1.3;
+  }
+  .book-author {
+    font-size: 0.8rem; color: #999; margin-bottom: 6px;
+  }
+  .book-rating {
+    font-size: 0.9rem; color: darkorange; letter-spacing: 1px;
+  }
+  .book-rating .empty { color: #333; }
+  .no-cover {
+    width: 100%; aspect-ratio: 2 / 3; background: #1a1a1a;
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 0.85rem; padding: 10px; text-align: center;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 768px) {
+    .page-title { font-size: 2rem; }
+    .books-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Books I've Read</h1>
+      <p class="page-description">A running list. Covers from Google Books. Ratings are my own.</p>
+      <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
+    </div>
+    
+    <div class="year-section">
+      <div class="year-heading">2026</div>
+      <div class="books-grid">
+    <div class="book">
+      <img class="book-cover" src="/images/books/die-with-zero-bill-perkins.jpg" alt="Die With Zero cover" loading="lazy">
+      <div class="book-title">Die With Zero</div>
+      <div class="book-author">Bill Perkins</div>
+      <div class="book-rating" aria-label="4 out of 5">★★★★<span class="empty">★</span></div>
+    </div>
+    <div class="book">
+      <img class="book-cover" src="/images/books/setting-the-table-danny-meyer.jpg" alt="Setting the Table cover" loading="lazy">
+      <div class="book-title">Setting the Table</div>
+      <div class="book-author">Danny Meyer</div>
+      <div class="book-rating" aria-label="5 out of 5">★★★★★</div>
+    </div></div>
+    </div>
+    <div class="year-section">
+      <div class="year-heading">2025</div>
+      <div class="books-grid">
+    <div class="book">
+      <img class="book-cover" src="/images/books/never-split-the-difference-chris-voss.jpg" alt="Never Split the Difference cover" loading="lazy">
+      <div class="book-title">Never Split the Difference</div>
+      <div class="book-author">Chris Voss</div>
+      <div class="book-rating" aria-label="5 out of 5">★★★★★</div>
+    </div>
+    <div class="book">
+      <img class="book-cover" src="/images/books/the-culture-code-daniel-coyle.jpg" alt="The Culture Code cover" loading="lazy">
+      <div class="book-title">The Culture Code</div>
+      <div class="book-author">Daniel Coyle</div>
+      <div class="book-rating" aria-label="4 out of 5">★★★★<span class="empty">★</span></div>
+    </div>
+    <div class="book">
+      <img class="book-cover" src="/images/books/shoe-dog-phil-knight.jpg" alt="Shoe Dog cover" loading="lazy">
+      <div class="book-title">Shoe Dog</div>
+      <div class="book-author">Phil Knight</div>
+      <div class="book-rating" aria-label="5 out of 5">★★★★★</div>
+    </div></div>
+    </div>
+  </div>
+</body>
+</html>

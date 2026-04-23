@@ -1,0 +1,30 @@
+page:
+  title: Books I've Read
+  summary: A running list. Covers from Google Books. Ratings are my own.
+
+# Rating scale: 1–5. Year = when I read it.
+books:
+  - title: Die With Zero
+    author: Bill Perkins
+    rating: 4
+    year: 2026
+
+  - title: Setting the Table
+    author: Danny Meyer
+    rating: 5
+    year: 2026
+
+  - title: Never Split the Difference
+    author: Chris Voss
+    rating: 5
+    year: 2025
+
+  - title: The Culture Code
+    author: Daniel Coyle
+    rating: 4
+    year: 2025
+
+  - title: Shoe Dog
+    author: Phil Knight
+    rating: 5
+    year: 2025

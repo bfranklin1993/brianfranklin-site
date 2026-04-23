@@ -7,11 +7,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+import YAML from 'yaml';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
 const OUT_DIR = path.join(ROOT, 'my-thoughts');
+const BOOKS_SRC = path.join(ROOT, 'books.yaml');
+const BOOKS_OUT = path.join(ROOT, 'books');
+const COVERS_DIR = path.join(ROOT, 'images', 'books');
 
 const BASE_STYLES = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -220,6 +224,207 @@ function renderPost(post) {
 </html>`;
 }
 
+const BOOKS_STYLES = `
+  .page-header { margin-bottom: 50px; text-align: center; }
+  .page-title {
+    font-size: 2.5rem; font-weight: 700;
+    color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
+  }
+  .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .year-section { margin-bottom: 50px; }
+  .year-heading {
+    font-size: 1.3rem; color: #41B6E6; margin-bottom: 20px;
+    letter-spacing: 0.05em; font-weight: 600;
+  }
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 28px;
+  }
+  .book {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+  }
+  .book-cover {
+    width: 100%; aspect-ratio: 2 / 3;
+    background: #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
+    transition: transform 0.2s ease;
+  }
+  .book:hover .book-cover { transform: translateY(-3px); }
+  .book-title {
+    font-size: 0.95rem; font-weight: 600; color: #fff;
+    margin-bottom: 2px; line-height: 1.3;
+  }
+  .book-author {
+    font-size: 0.8rem; color: #999; margin-bottom: 6px;
+  }
+  .book-rating {
+    font-size: 0.9rem; color: darkorange; letter-spacing: 1px;
+  }
+  .book-rating .empty { color: #333; }
+  .no-cover {
+    width: 100%; aspect-ratio: 2 / 3; background: #1a1a1a;
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 0.85rem; padding: 10px; text-align: center;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 768px) {
+    .page-title { font-size: 2rem; }
+    .books-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 20px; }
+  }
+`;
+
+function slugifyBook(title, author) {
+  return slugify(`${title}-${author}`);
+}
+
+function starHtml(rating) {
+  const r = Math.max(0, Math.min(5, Math.round(rating || 0)));
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    html += i < r ? '★' : '<span class="empty">★</span>';
+  }
+  return html;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function downloadTo(imgUrl, filePath) {
+  const imgRes = await fetch(imgUrl, { headers: { 'User-Agent': 'brianfranklin.work/1.0' } });
+  if (!imgRes.ok) throw new Error(`download ${imgRes.status}`);
+  const buf = Buffer.from(await imgRes.arrayBuffer());
+  if (buf.length < 1024) throw new Error(`tiny image (${buf.length}B) — likely a placeholder`);
+  fs.mkdirSync(COVERS_DIR, { recursive: true });
+  fs.writeFileSync(filePath, buf);
+}
+
+async function tryOpenLibrary(title, author, filePath) {
+  const q = new URLSearchParams({ title, author, limit: '1' });
+  const searchUrl = `https://openlibrary.org/search.json?${q.toString()}`;
+  const res = await fetch(searchUrl, { headers: { 'User-Agent': 'brianfranklin.work/1.0' } });
+  if (!res.ok) throw new Error(`OL search ${res.status}`);
+  const data = await res.json();
+  const doc = data?.docs?.[0];
+  const coverId = doc?.cover_i;
+  if (!coverId) throw new Error('no cover_i in OL result');
+  const imgUrl = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+  await downloadTo(imgUrl, filePath);
+}
+
+async function tryGoogleBooks(title, author, filePath) {
+  const query = `intitle:${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author)}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`GB ${res.status}`);
+  const data = await res.json();
+  const links = data?.items?.[0]?.volumeInfo?.imageLinks;
+  let imgUrl = links?.thumbnail || links?.smallThumbnail;
+  if (!imgUrl) throw new Error('no imageLinks');
+  imgUrl = imgUrl.replace('http://', 'https://').replace(/&edge=curl/, '').replace(/zoom=1/, 'zoom=3');
+  await downloadTo(imgUrl, filePath);
+}
+
+async function fetchCover(title, author, slug) {
+  const filePath = path.join(COVERS_DIR, `${slug}.jpg`);
+  if (fs.existsSync(filePath)) return `/images/books/${slug}.jpg`;
+
+  const attempts = [
+    { name: 'OpenLibrary', fn: () => tryOpenLibrary(title, author, filePath) },
+    { name: 'GoogleBooks', fn: () => tryGoogleBooks(title, author, filePath) },
+  ];
+  for (const attempt of attempts) {
+    try {
+      await attempt.fn();
+      console.log(`  ✓ cover via ${attempt.name}: ${title}`);
+      await sleep(300); // be polite
+      return `/images/books/${slug}.jpg`;
+    } catch (err) {
+      console.log(`  · ${attempt.name} miss for "${title}": ${err.message}`);
+    }
+  }
+  console.warn(`  ! no cover found for "${title}" by ${author}`);
+  return null;
+}
+
+function renderBookCard(book, coverPath) {
+  const coverEl = coverPath
+    ? `<img class="book-cover" src="${coverPath}" alt="${escapeHtml(book.title)} cover" loading="lazy">`
+    : `<div class="no-cover">${escapeHtml(book.title)}</div>`;
+  return `
+    <div class="book">
+      ${coverEl}
+      <div class="book-title">${escapeHtml(book.title)}</div>
+      <div class="book-author">${escapeHtml(book.author)}</div>
+      <div class="book-rating" aria-label="${book.rating || 0} out of 5">${starHtml(book.rating)}</div>
+    </div>`;
+}
+
+function renderBooksPage(page, sections) {
+  const body = sections.map(({ year, html }) => `
+    <div class="year-section">
+      <div class="year-heading">${escapeHtml(String(year))}</div>
+      <div class="books-grid">${html}</div>
+    </div>`).join('');
+
+  return `${HEAD(`${page.title || "Books I've Read"} | Brian Franklin`, BOOKS_STYLES)}
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">${escapeHtml(page.title || "Books I've Read")}</h1>
+      ${page.summary ? `<p class="page-description">${escapeHtml(page.summary)}</p>` : ''}
+      <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
+    </div>
+    ${body}
+  </div>
+</body>
+</html>`;
+}
+
+async function buildBooks() {
+  if (!fs.existsSync(BOOKS_SRC)) {
+    console.log('No books.yaml found — skipping.');
+    return;
+  }
+  const raw = fs.readFileSync(BOOKS_SRC, 'utf8');
+  const parsed = YAML.parse(raw) || {};
+  const page = parsed.page || {};
+  const books = parsed.books || [];
+
+  // Group by year, newest year first
+  const byYear = new Map();
+  for (const b of books) {
+    const y = b.year || 'Undated';
+    if (!byYear.has(y)) byYear.set(y, []);
+    byYear.get(y).push(b);
+  }
+  const years = [...byYear.keys()].sort((a, b) => {
+    if (a === 'Undated') return 1;
+    if (b === 'Undated') return -1;
+    return b - a;
+  });
+
+  const sections = [];
+  for (const year of years) {
+    const cards = [];
+    for (const book of byYear.get(year)) {
+      const slug = slugifyBook(book.title, book.author);
+      const cover = await fetchCover(book.title, book.author, slug);
+      cards.push(renderBookCard(book, cover));
+    }
+    sections.push({ year, html: cards.join('') });
+  }
+
+  if (fs.existsSync(BOOKS_OUT)) fs.rmSync(BOOKS_OUT, { recursive: true, force: true });
+  fs.mkdirSync(BOOKS_OUT, { recursive: true });
+  fs.writeFileSync(path.join(BOOKS_OUT, 'index.html'), renderBooksPage(page, sections));
+  console.log(`Built books/ (${books.length} books, ${years.length} year group(s))`);
+}
+
 function cleanOutDir() {
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -231,7 +436,7 @@ function cleanOutDir() {
   }
 }
 
-function main() {
+async function main() {
   const posts = readPosts();
   cleanOutDir();
   fs.writeFileSync(path.join(OUT_DIR, 'index.html'), renderIndex(posts));
@@ -242,6 +447,7 @@ function main() {
   }
   console.log(`Built ${posts.length} post(s) -> ${path.relative(ROOT, OUT_DIR)}/`);
   for (const p of posts) console.log(`  - ${p.slug} (${p.date})`);
+  await buildBooks();
 }
 
-main();
+main().catch(err => { console.error(err); process.exit(1); });
