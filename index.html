@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brian Franklin</title>
+    <!-- Import Urbanist font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Import Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Base styles */
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: #121212; /* Slightly softer than pure black for easier reading */
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px; /* Increased max-width */
+            padding: 60px; /* More generous padding */
+            background-color: #000000; /* Pure black background for content area */
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8); /* Subtle shadow for depth */
+        }
+        
+        /* Profile section with photo */
+        .profile {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 40px;
+        }
+        
+        .profile-photo {
+            width: 130px;
+            height: 275px;
+            border-radius: 8%;
+            object-fit: cover;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem; /* Larger heading */
+            font-weight: 700; /* Bolder */
+            margin-bottom: 1.5rem;
+            color: darkorange;
+            letter-spacing: -0.02em; /* Tighter letter spacing for modern look */
+        }
+        
+        p {
+            font-size: 1.2rem; /* Slightly larger text */
+            margin-bottom: 1.8rem;
+            max-width: 100%; /* Allow text to use full container width */
+        }
+        
+        /* Accent */
+        .accent {
+            color: darkorange;
+            font-weight: 600;
+        }
+
+        /* Company link colors (each company's own brand color) */
+        a.company {
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        a.company:hover { opacity: 0.75; }
+        a.prismatic { color: #00C3A5; }  /* Prismatic teal */
+        a.hiro      { color: #FF5500; }  /* Hiro orange */
+        a.zendesk   { color: #17494D; }  /* Zendesk dark green */
+
+        /* City accent */
+        .city {
+            color: #ff9a3c;
+            font-weight: 600;
+        }
+        
+        /* Social links styling */
+        .socials {
+            margin-top: 1rem;
+            display: flex;
+            gap: 20px; /* Space between links */
+        }
+        
+        .socials a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .socials a:hover {
+            background-color: darkorange;
+            transform: translateY(-3px);
+        }
+        
+        .socials i {
+            font-size: 1.1rem; /* Icon size */
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px;
+            }
+            
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+            
+            .socials {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .socials a {
+                display: flex;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <!-- Replace with your actual photo URL -->
+            <img src="images/profile-photo.png" alt="Brian Franklin" class="profile-photo">
+            <div class="profile-info">
+                <h1>Brian Franklin</h1>
+                <p>I am a marketing leader building teams to amplify technology products that solve real problems for software companies.</p>
+                <p>I currently <span class="accent">lead marketing</span> at <a class="company prismatic" href="https://prismatic.io" target="_blank" rel="noopener noreferrer">Prismatic</a>. Previously at <a class="company hiro" href="https://www.hiro.so" target="_blank" rel="noopener noreferrer">Hiro</a> and <a class="company zendesk" href="https://www.zendesk.com" target="_blank" rel="noopener noreferrer">Zendesk</a>.</p>
+                <p>I am based in <span class="city">Chicago</span>, and I love to learn, travel, and read.</p>
+            </div>
+        </div>
+        <div class="socials">
+            <a href="https://www.twitter.com/bfrankbtc" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://www.linkedin.com/in/brian-m-franklin" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="my-thoughts">
+                <i class="fas fa-brain"></i> My Thoughts
+            </a>
+        </div>
+    </div>
+</body>
+</html>

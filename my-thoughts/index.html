@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Thoughts | Brian Franklin</title>
+    <!-- Same font imports as your main page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Same base styles as your main page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Changed to column for blog layout */
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 60px;
+            background-color: #000000;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            margin: 40px 0;
+        }
+        
+        /* Blog-specific styles */
+        .blog-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: darkorange;
+            margin-bottom: 20px;
+        }
+        
+        .blog-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .home-link {
+            display: inline-block;
+            color: #ffffff;
+            text-decoration: none;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .home-link:hover {
+            color: darkorange;
+        }
+        
+        .posts-list {
+            list-style: none;
+        }
+        
+        .post-item {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 40px;
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        
+        .post-date {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        .post-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .post-title a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .post-title a:hover {
+            color: darkorange;
+        }
+        
+        .post-excerpt {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: darkorange;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px;
+                margin: 20px;
+            }
+            
+            .blog-title {
+                font-size: 2rem;
+            }
+            
+            .post-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="blog-header">
+            <h1 class="blog-title">My Thoughts</h1>
+            <p class="blog-description">Personal reflections, ideas, and insights about marketing and life.</p>
+            <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
+        </div>
+        
+        <ul class="posts-list">
+            <!-- Example post 1 - Replace with your actual posts -->
+            <li class="post-item">
+                <div class="post-date">May 15, 2025</div>
+                <h2 class="post-title"><a href="first-post.html">My First Blog Post Title</a></h2>
+                <p class="post-excerpt">This is a short excerpt or summary of what this blog post is about. It should be engaging and make readers want to click to read more...</p>
+                <a href="first-post.html" class="read-more">Read more</a>
+            </li>
+            
+            <!-- Add more posts here as you create them -->
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Title | My Thoughts | Brian Franklin</title>
+    <!-- Same imports as the index page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Same base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Urbanist', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 60px;
+            background-color: #000000;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            margin: 40px 0;
+        }
+        
+        /* Post specific styles */
+        .post-header {
+            margin-bottom: 40px;
+        }
+        
+        .blog-nav {
+            margin-bottom: 30px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-link:hover {
+            color: darkorange;
+        }
+        
+        .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: darkorange;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+            color: #999;
+            margin-bottom: 40px;
+        }
+        
+        .post-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .post-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .post-content p {
+            margin-bottom: 25px;
+        }
+        
+        .post-content h2 {
+            font-size: 1.8rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .post-content h3 {
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .post-content ul, .post-content ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        .post-content li {
+            margin-bottom: 10px;
+        }
+        
+        .post-content blockquote {
+            border-left: 4px solid darkorange;
+            padding-left: 20px;
+            margin-left: 0;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+            margin-top: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+            background-color: darkorange;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px;
+                margin: 20px;
+            }
+            
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="post-header">
+            <div class="blog-nav">
+                <a href="/my-thoughts/" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Back to all posts
+                </a>
+            </div>
+            
+            <h1 class="post-title">Your Blog Post Title Goes Here</h1>
+            
+            <div class="post-meta">
+                <div class="post-date">
+                    <i class="far fa-calendar"></i> May 15, 2025
+                </div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <!-- Your blog post content goes here -->
+            <p>This is an introduction paragraph for your blog post. You should write a compelling opening that catches the reader's attention and introduces the topic of your post.</p>
+            
+            <p>This is where you can continue with the main content of your post. You can include multiple paragraphs, and they will be nicely spaced out.</p>
+            
+            <h2>This is a Section Heading</h2>
+            
+            <p>You can organize your post with headings like this one. This helps break up the content and makes it easier to read.</p>
+            
+            <p>You can write about your thoughts, experiences, insights, or anything else you want to share with your readers.</p>
+            
+            <h3>This is a Subsection Heading</h3>
+            
+            <p>For more detailed organization, you can use smaller headings like this one.</p>
+            
+            <ul>
+                <li>You can include bullet points for lists</li>
+                <li>This helps organize information in a clear way</li>
+                <li>Each point should be concise and meaningful</li>
+            </ul>
+            
+            <blockquote>
+                You can use blockquotes like this to highlight important quotes or thoughts that deserve special attention.
+            </blockquote>
+            
+            <p>Finally, wrap up your post with a conclusion that summarizes your main points or leaves the reader with something to think about.</p>
+            
+            <!-- Back to top link -->
+            <a href="#" class="back-to-top">Back to top</a>
+        </div>
+    </div>
+</body>
+</html>
