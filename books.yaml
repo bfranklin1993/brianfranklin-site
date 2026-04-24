@@ -1,30 +1,206 @@
 page:
   title: Books I've Read
-  summary: A running list. Covers from Google Books. Ratings are my own.
+  summary: A running list, organized by year read. Covers pulled from OpenLibrary; ratings are my own.
 
-# Rating scale: 1–5. Year = when I read it.
+# Rating scale: 1–5. Year = when I finished it.
 books:
-  - title: Die With Zero
-    author: Bill Perkins
+  # 2026
+  - title: From Russia With Love
+    author: Ian Fleming
+    rating: 3
+    year: 2026
+  - title: "Don't Believe Everything You Think"
+    author: Joseph Nguyen
+    rating: 2
+    year: 2026
+  - title: The Art of Being Lucky
+    author: Vegas Matt
+    rating: 3
+    year: 2026
+  - title: Tell Me What You Did
+    author: Carter Wilson
+    rating: 4
+    year: 2026
+  - title: "You Shouldn't Have Come Here"
+    author: Jeneva Rose
     rating: 4
     year: 2026
 
-  - title: Setting the Table
-    author: Danny Meyer
-    rating: 5
-    year: 2026
-
-  - title: Never Split the Difference
-    author: Chris Voss
-    rating: 5
-    year: 2025
-
-  - title: The Culture Code
-    author: Daniel Coyle
+  # 2025
+  - title: Friends Like These
+    author: Kimberly McCreight
     rating: 4
     year: 2025
-
-  - title: Shoe Dog
-    author: Phil Knight
+  - title: The Psychology of Money
+    author: Morgan Housel
+    rating: 4
+    year: 2025
+  - title: 107 Days
+    author: Kamala Harris
+    rating: 3
+    year: 2025
+  - title: "What's Next"
+    rating: 3
+    year: 2025
+  - title: The Almanack of Naval Ravikant
+    author: Eric Jorgenson
+    rating: 4
+    year: 2025
+  - title: The Night of the Crash
+    rating: 4
+    year: 2025
+  - title: Startupland
+    author: Mikkel Svane
+    rating: 4
+    year: 2025
+  - title: The Cabin in the Woods
+    rating: 3
+    year: 2025
+  - title: The Making of a Manager
+    author: Julie Zhuo
+    rating: 3
+    year: 2025
+  - title: Tiger, Tiger
+    author: James Patterson
     rating: 5
     year: 2025
+  - title: Diamonds Are Forever
+    author: Ian Fleming
+    rating: 4
+    year: 2025
+  - title: The Five Dysfunctions of a Team
+    author: Patrick Lencioni
+    rating: 4
+    year: 2025
+  - title: The Perfect Day to Boss Up
+    author: Rick Ross
+    rating: 4
+    year: 2025
+  - title: Moonraker
+    author: Ian Fleming
+    rating: 4
+    year: 2025
+  - title: If These Walls Could Talk
+    rating: 5
+    year: 2025
+  - title: Live and Let Die
+    author: Ian Fleming
+    rating: 5
+    year: 2025
+  - title: On a Quiet Street
+    author: Seraphina Nova Glass
+    rating: 4
+    year: 2025
+  - title: Simply Put
+    author: Ben Guttmann
+    rating: 3
+    year: 2025
+  - title: The Back Roads of March
+    rating: 3
+    year: 2025
+  - title: Freakonomics
+    author: Steven Levitt
+    rating: 3
+    year: 2025
+
+  # 2024
+  - title: "Believe: The Untold Story Behind Ted Lasso"
+    author: Jeremy Egner
+    rating: 5
+    year: 2024
+  - title: Casino Royale
+    author: Ian Fleming
+    rating: 5
+    year: 2024
+  - title: The New House
+    author: Tess Stimson
+    rating: 4
+    year: 2024
+  - title: Born For This
+    author: Chris Guillebeau
+    rating: 4
+    year: 2024
+  - title: Million Dollar Weekend
+    author: Noah Kagan
+    rating: 4
+    year: 2024
+  - title: The Last Flight
+    author: Julie Clark
+    rating: 3
+    year: 2024
+  - title: Atomic Habits
+    author: James Clear
+    rating: 5
+    year: 2024
+  - title: Everybody Writes
+    author: Ann Handley
+    rating: 4
+    year: 2024
+  - title: Finish
+    author: Jon Acuff
+    rating: 4
+    year: 2024
+  - title: The Girl Who Vanished
+    rating: 5
+    year: 2024
+  - title: Final Call
+    rating: 5
+    year: 2024
+  - title: The Art of Laziness
+    author: Library Mindset
+    rating: 3
+    year: 2024
+  - title: Bitcoin Billionaires
+    author: Ben Mezrich
+    rating: 5
+    year: 2024
+  - title: The Mom Test
+    author: Rob Fitzpatrick
+    rating: 3
+    year: 2024
+  - title: Bone in the Throat
+    author: Anthony Bourdain
+    rating: 4
+    year: 2024
+  - title: Obviously Awesome
+    author: April Dunford
+    rating: 3
+    year: 2024
+
+  # 2023
+  - title: Just the Nicest Couple
+    author: Mary Kubica
+    rating: 2
+    year: 2023
+  - title: 4-Hour Work Week
+    author: Tim Ferriss
+    rating: 3
+    year: 2023
+  - title: Anthony Bourdain - The Oral Biography
+    author: Laurie Woolever
+    rating: 4
+    year: 2023
+  - title: Harry Potter and the Half-Blood Prince
+    author: J.K. Rowling
+    rating: 5
+    year: 2023
+  - title: Harry Potter and the Deathly Hallows
+    author: J.K. Rowling
+    rating: 4
+    year: 2023
+  - title: Harry Potter and the Order of the Phoenix
+    author: J.K. Rowling
+    rating: 4
+    year: 2023
+  - title: I Will Teach You to Be Rich
+    author: Ramit Sethi
+    rating: 5
+    year: 2023
+
+  # Undated (no date in source)
+  - title: Billion Dollar Loser
+    author: Reeves Wiedeman
+    rating: 5
+  - title: Deep Work
+    author: Cal Newport
+    rating: 2

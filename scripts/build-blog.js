@@ -280,7 +280,7 @@ const BOOKS_STYLES = `
 `;
 
 function slugifyBook(title, author) {
-  return slugify(`${title}-${author}`);
+  return slugify(author ? `${title}-${author}` : title);
 }
 
 function starHtml(rating) {
@@ -303,21 +303,35 @@ async function downloadTo(imgUrl, filePath) {
   fs.writeFileSync(filePath, buf);
 }
 
-async function tryOpenLibrary(title, author, filePath) {
-  const q = new URLSearchParams({ title, author, limit: '1' });
-  const searchUrl = `https://openlibrary.org/search.json?${q.toString()}`;
+async function olSearch(params, filePath) {
+  const searchUrl = `https://openlibrary.org/search.json?${params.toString()}`;
   const res = await fetch(searchUrl, { headers: { 'User-Agent': 'brianfranklin.work/1.0' } });
-  if (!res.ok) throw new Error(`OL search ${res.status}`);
+  if (!res.ok) throw new Error(`OL ${res.status}`);
   const data = await res.json();
-  const doc = data?.docs?.[0];
-  const coverId = doc?.cover_i;
-  if (!coverId) throw new Error('no cover_i in OL result');
-  const imgUrl = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+  // Scan first 5 results for any with a cover_i
+  const doc = (data?.docs || []).slice(0, 5).find(d => d.cover_i);
+  if (!doc) throw new Error('no cover_i in top results');
+  const imgUrl = `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`;
   await downloadTo(imgUrl, filePath);
 }
 
+async function tryOpenLibrary(title, author, filePath) {
+  const q = new URLSearchParams({ title, limit: '5' });
+  if (author) q.set('author', author);
+  await olSearch(q, filePath);
+}
+
+async function tryOpenLibraryFreeText(title, author, filePath) {
+  // Free-text search is fuzzier and often catches what structured misses
+  const stripped = title.replace(/[:\-–—].*/, '').trim(); // drop subtitle after :-—
+  const terms = [stripped, author].filter(Boolean).join(' ');
+  const q = new URLSearchParams({ q: terms, limit: '5' });
+  await olSearch(q, filePath);
+}
+
 async function tryGoogleBooks(title, author, filePath) {
-  const query = `intitle:${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author)}`;
+  let query = `intitle:${encodeURIComponent(title)}`;
+  if (author) query += `+inauthor:${encodeURIComponent(author)}`;
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`GB ${res.status}`);
@@ -334,8 +348,9 @@ async function fetchCover(title, author, slug) {
   if (fs.existsSync(filePath)) return `/images/books/${slug}.jpg`;
 
   const attempts = [
-    { name: 'OpenLibrary', fn: () => tryOpenLibrary(title, author, filePath) },
-    { name: 'GoogleBooks', fn: () => tryGoogleBooks(title, author, filePath) },
+    { name: 'OL-structured', fn: () => tryOpenLibrary(title, author, filePath) },
+    { name: 'OL-freetext',  fn: () => tryOpenLibraryFreeText(title, author, filePath) },
+    { name: 'GoogleBooks',  fn: () => tryGoogleBooks(title, author, filePath) },
   ];
   for (const attempt of attempts) {
     try {
@@ -355,12 +370,18 @@ function renderBookCard(book, coverPath) {
   const coverEl = coverPath
     ? `<img class="book-cover" src="${coverPath}" alt="${escapeHtml(book.title)} cover" loading="lazy">`
     : `<div class="no-cover">${escapeHtml(book.title)}</div>`;
+  const authorEl = book.author
+    ? `<div class="book-author">${escapeHtml(book.author)}</div>`
+    : '';
+  const ratingEl = (book.rating != null)
+    ? `<div class="book-rating" aria-label="${book.rating} out of 5">${starHtml(book.rating)}</div>`
+    : '';
   return `
     <div class="book">
       ${coverEl}
       <div class="book-title">${escapeHtml(book.title)}</div>
-      <div class="book-author">${escapeHtml(book.author)}</div>
-      <div class="book-rating" aria-label="${book.rating || 0} out of 5">${starHtml(book.rating)}</div>
+      ${authorEl}
+      ${ratingEl}
     </div>`;
 }
 
