@@ -200,11 +200,11 @@ books:
     author: Ramit Sethi
     rating: 5
     year: 2023
-
-  # Undated (no date in source)
   - title: Billion Dollar Loser
     author: Reeves Wiedeman
     rating: 5
+    year: 2023
   - title: Deep Work
     author: Cal Newport
     rating: 2
+    year: 2023
