@@ -5,6 +5,10 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: Careless People
+    author: Sarah Wynn-Williams
+    rating: 4
+    year: 2026
   - title: From Russia With Love
     author: Ian Fleming
     rating: 3
