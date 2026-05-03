@@ -16,6 +16,9 @@ const OUT_DIR = path.join(ROOT, 'my-thoughts');
 const BOOKS_SRC = path.join(ROOT, 'books.yaml');
 const BOOKS_OUT = path.join(ROOT, 'books');
 const COVERS_DIR = path.join(ROOT, 'images', 'books');
+const PROJECTS_SRC = path.join(ROOT, 'projects.yaml');
+const PROJECTS_OUT = path.join(ROOT, 'projects');
+const PROJECTS_IMG_DIR = path.join(ROOT, 'images', 'projects');
 
 const BASE_STYLES = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -446,6 +449,122 @@ async function buildBooks() {
   console.log(`Built books/ (${books.length} books, ${years.length} year group(s))`);
 }
 
+const PROJECTS_STYLES = `
+  .page-header { margin-bottom: 50px; text-align: center; }
+  .page-title {
+    font-size: 2.5rem; font-weight: 700;
+    color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
+  }
+  .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+  }
+  .project {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 26px 28px;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .project:hover { transform: translateY(-3px); border-color: #444; }
+  .project-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+  }
+  .project-logo {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: #1a1a1a;
+    object-fit: contain;
+    flex-shrink: 0;
+    padding: 4px;
+  }
+  .project-logo-placeholder {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 0.85rem; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .project-name { font-size: 1.3rem; font-weight: 700; color: #fff; }
+  .project-desc {
+    font-size: 0.98rem; color: #ccc; margin-bottom: 18px;
+    flex: 1;
+  }
+  .project-url {
+    font-size: 0.95rem; color: darkorange;
+    word-break: break-all;
+  }
+  .project-url:hover { color: darkorange; opacity: 0.75; }
+  @media (max-width: 768px) {
+    .page-title { font-size: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; gap: 22px; }
+  }
+`;
+
+function displayUrl(url) {
+  return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+}
+
+function renderProjectCard(p) {
+  const logo = p.logo
+    ? `<img class="project-logo" src="${escapeHtml(p.logo)}" alt="${escapeHtml(p.name)} logo">`
+    : `<div class="project-logo-placeholder">${escapeHtml(p.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase())}</div>`;
+
+  const urlEl = p.url
+    ? `<a class="project-url" href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(displayUrl(p.url))}</a>`
+    : '';
+
+  return `
+    <div class="project">
+      <div class="project-head">
+        ${logo}
+        <div class="project-name">${escapeHtml(p.name)}</div>
+      </div>
+      ${p.description ? `<div class="project-desc">${escapeHtml(p.description)}</div>` : ''}
+      ${urlEl}
+    </div>`;
+}
+
+function renderProjectsPage(page, projects) {
+  const grid = projects.length === 0
+    ? `<p style="color:#999;text-align:center;font-style:italic;">No projects yet.</p>`
+    : `<div class="projects-grid">${projects.map(renderProjectCard).join('')}</div>`;
+
+  return `${HEAD(`${page.title || 'Projects'} | Brian Franklin`, PROJECTS_STYLES)}
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">${escapeHtml(page.title || 'Projects')}</h1>
+      ${page.summary ? `<p class="page-description">${escapeHtml(page.summary)}</p>` : ''}
+      <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
+    </div>
+    ${grid}
+  </div>
+</body>
+</html>`;
+}
+
+function buildProjects() {
+  if (!fs.existsSync(PROJECTS_SRC)) {
+    console.log('No projects.yaml found — skipping.');
+    return;
+  }
+  const raw = fs.readFileSync(PROJECTS_SRC, 'utf8');
+  const parsed = YAML.parse(raw) || {};
+  const page = parsed.page || {};
+  const projects = parsed.projects || [];
+
+  if (fs.existsSync(PROJECTS_OUT)) fs.rmSync(PROJECTS_OUT, { recursive: true, force: true });
+  fs.mkdirSync(PROJECTS_OUT, { recursive: true });
+  fs.mkdirSync(PROJECTS_IMG_DIR, { recursive: true });
+  fs.writeFileSync(path.join(PROJECTS_OUT, 'index.html'), renderProjectsPage(page, projects));
+  console.log(`Built projects/ (${projects.length} project(s))`);
+}
+
 function cleanOutDir() {
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -469,6 +588,7 @@ async function main() {
   console.log(`Built ${posts.length} post(s) -> ${path.relative(ROOT, OUT_DIR)}/`);
   for (const p of posts) console.log(`  - ${p.slug} (${p.date})`);
   await buildBooks();
+  buildProjects();
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

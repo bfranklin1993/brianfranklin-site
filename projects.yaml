@@ -1,0 +1,22 @@
+page:
+  title: "Projects"
+  summary: "A few things I'm working on outside the day job. Some are useful, some are just fun."
+
+projects:
+  - name: "Road to March"
+    slug: "road-to-march"
+    description: "A college basketball fan's take on player and team rankings. Updated daily during the season."
+    url: "https://roadtomarch.com"
+    logo: "/images/projects/road-to-march.png"
+
+  - name: "Non-Stop Routes"
+    slug: "non-stop-routes"
+    description: "An interactive map that helps you find your next vacation by showing every non-stop flight from your nearest airport."
+    url: "https://nonstoproutes.com"
+    logo: "/images/projects/non-stop-routes.svg"
+
+  - name: "1049 Capital"
+    slug: "1049-capital"
+    description: "We help startups set up SPVs, raise capital, and we invest in the founders we believe in."
+    url: "https://1049capital.com"
+    logo: "/images/projects/1049-capital.png"

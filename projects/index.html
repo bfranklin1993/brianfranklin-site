@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Brian Franklin</title>
+  <link rel="icon" type="image/png" href="/images/profile-photo.png">
+  <link rel="apple-touch-icon" href="/images/profile-photo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Urbanist', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    width: 100%;
+    max-width: 900px;
+    padding: 60px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin: 40px 0;
+  }
+  a { color: darkorange; text-decoration: none; transition: opacity 0.2s ease; }
+  a:hover { opacity: 0.75; }
+  .home-link {
+    display: inline-block;
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 1.05rem;
+  }
+  .home-link:hover { color: darkorange; opacity: 1; }
+  @media (max-width: 768px) {
+    .container { padding: 40px; margin: 20px; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 25px; }
+  }
+
+  .page-header { margin-bottom: 50px; text-align: center; }
+  .page-title {
+    font-size: 2.5rem; font-weight: 700;
+    color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
+  }
+  .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+  }
+  .project {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 26px 28px;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .project:hover { transform: translateY(-3px); border-color: #444; }
+  .project-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+  }
+  .project-logo {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: #1a1a1a;
+    object-fit: contain;
+    flex-shrink: 0;
+    padding: 4px;
+  }
+  .project-logo-placeholder {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 0.85rem; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .project-name { font-size: 1.3rem; font-weight: 700; color: #fff; }
+  .project-desc {
+    font-size: 0.98rem; color: #ccc; margin-bottom: 18px;
+    flex: 1;
+  }
+  .project-url {
+    font-size: 0.95rem; color: darkorange;
+    word-break: break-all;
+  }
+  .project-url:hover { color: darkorange; opacity: 0.75; }
+  @media (max-width: 768px) {
+    .page-title { font-size: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; gap: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-description">A few things I'm working on outside the day job. Some are useful, some are just fun.</p>
+      <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
+    </div>
+    <div class="projects-grid">
+    <div class="project">
+      <div class="project-head">
+        <img class="project-logo" src="/images/projects/road-to-march.png" alt="Road to March logo">
+        <div class="project-name">Road to March</div>
+      </div>
+      <div class="project-desc">A college basketball fan's take on player and team rankings. Updated daily during the season.</div>
+      <a class="project-url" href="https://roadtomarch.com" target="_blank" rel="noopener noreferrer">roadtomarch.com</a>
+    </div>
+    <div class="project">
+      <div class="project-head">
+        <img class="project-logo" src="/images/projects/non-stop-routes.svg" alt="Non-Stop Routes logo">
+        <div class="project-name">Non-Stop Routes</div>
+      </div>
+      <div class="project-desc">An interactive map that helps you find your next vacation by showing every non-stop flight from your nearest airport.</div>
+      <a class="project-url" href="https://nonstoproutes.com" target="_blank" rel="noopener noreferrer">nonstoproutes.com</a>
+    </div>
+    <div class="project">
+      <div class="project-head">
+        <img class="project-logo" src="/images/projects/1049-capital.png" alt="1049 Capital logo">
+        <div class="project-name">1049 Capital</div>
+      </div>
+      <div class="project-desc">We help startups set up SPVs, raise capital, and we invest in the founders we believe in.</div>
+      <a class="project-url" href="https://1049capital.com" target="_blank" rel="noopener noreferrer">1049capital.com</a>
+    </div></div>
+  </div>
+</body>
+</html>
