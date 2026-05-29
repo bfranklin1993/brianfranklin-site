@@ -234,10 +234,19 @@ const BOOKS_STYLES = `
     color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
   }
   .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .total-count {
+    margin-top: 18px; font-size: 0.95rem; color: #888;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .total-count strong { color: darkorange; font-weight: 700; }
   .year-section { margin-bottom: 50px; }
   .year-heading {
     font-size: 1.3rem; color: #41B6E6; margin-bottom: 20px;
     letter-spacing: 0.05em; font-weight: 600;
+  }
+  .year-heading .year-count {
+    color: #888; font-weight: 400; font-size: 0.9rem;
+    margin-left: 10px; letter-spacing: 0.02em;
   }
   .books-grid {
     display: grid;
@@ -388,10 +397,10 @@ function renderBookCard(book, coverPath) {
     </div>`;
 }
 
-function renderBooksPage(page, sections) {
-  const body = sections.map(({ year, html }) => `
+function renderBooksPage(page, sections, total) {
+  const body = sections.map(({ year, count, html }) => `
     <div class="year-section">
-      <div class="year-heading">${escapeHtml(String(year))}</div>
+      <div class="year-heading">${escapeHtml(String(year))}<span class="year-count">${count} ${count === 1 ? 'book' : 'books'}</span></div>
       <div class="books-grid">${html}</div>
     </div>`).join('');
 
@@ -401,6 +410,7 @@ function renderBooksPage(page, sections) {
     <div class="page-header">
       <h1 class="page-title">${escapeHtml(page.title || "Books I've Read")}</h1>
       ${page.summary ? `<p class="page-description">${escapeHtml(page.summary)}</p>` : ''}
+      <div class="total-count"><strong>${total}</strong> ${total === 1 ? 'book' : 'books'} read</div>
       <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
     </div>
     ${body}
@@ -440,12 +450,12 @@ async function buildBooks() {
       const cover = await fetchCover(book.title, book.author, slug);
       cards.push(renderBookCard(book, cover));
     }
-    sections.push({ year, html: cards.join('') });
+    sections.push({ year, count: byYear.get(year).length, html: cards.join('') });
   }
 
   if (fs.existsSync(BOOKS_OUT)) fs.rmSync(BOOKS_OUT, { recursive: true, force: true });
   fs.mkdirSync(BOOKS_OUT, { recursive: true });
-  fs.writeFileSync(path.join(BOOKS_OUT, 'index.html'), renderBooksPage(page, sections));
+  fs.writeFileSync(path.join(BOOKS_OUT, 'index.html'), renderBooksPage(page, sections, books.length));
   console.log(`Built books/ (${books.length} books, ${years.length} year group(s))`);
 }
 

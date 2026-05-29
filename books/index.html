@@ -53,10 +53,19 @@
     color: darkorange; margin-bottom: 15px; letter-spacing: -0.02em;
   }
   .page-description { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+  .total-count {
+    margin-top: 18px; font-size: 0.95rem; color: #888;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .total-count strong { color: darkorange; font-weight: 700; }
   .year-section { margin-bottom: 50px; }
   .year-heading {
     font-size: 1.3rem; color: #41B6E6; margin-bottom: 20px;
     letter-spacing: 0.05em; font-weight: 600;
+  }
+  .year-heading .year-count {
+    color: #888; font-weight: 400; font-size: 0.9rem;
+    margin-left: 10px; letter-spacing: 0.02em;
   }
   .books-grid {
     display: grid;
@@ -106,11 +115,12 @@
     <div class="page-header">
       <h1 class="page-title">Books I've Read</h1>
       <p class="page-description">A running list, organized by year read. Covers pulled from OpenLibrary; ratings are my own.</p>
+      <div class="total-count"><strong>52</strong> books read</div>
       <a href="/" class="home-link"><i class="fas fa-arrow-left"></i> Back to home</a>
     </div>
     
     <div class="year-section">
-      <div class="year-heading">2026</div>
+      <div class="year-heading">2026<span class="year-count">7 books</span></div>
       <div class="books-grid">
     <div class="book">
       <img class="book-cover" src="/images/books/character-limit-how-elon-musk-destroyed-twitter-kate-conger-and-ryan-mac.jpg" alt="Character Limit: How Elon Musk Destroyed Twitter cover" loading="lazy">
@@ -156,7 +166,7 @@
     </div></div>
     </div>
     <div class="year-section">
-      <div class="year-heading">2025</div>
+      <div class="year-heading">2025<span class="year-count">20 books</span></div>
       <div class="books-grid">
     <div class="book">
       <img class="book-cover" src="/images/books/friends-like-these-kimberly-mccreight.jpg" alt="Friends Like These cover" loading="lazy">
@@ -261,7 +271,7 @@
       <div class="book-rating" aria-label="4 out of 5">★★★★<span class="empty">★</span></div>
     </div>
     <div class="book">
-      <div class="no-cover">Simply Put</div>
+      <img class="book-cover" src="/images/books/simply-put-ben-guttmann.jpg" alt="Simply Put cover" loading="lazy">
       <div class="book-title">Simply Put</div>
       <div class="book-author">Ben Guttmann</div>
       <div class="book-rating" aria-label="3 out of 5">★★★<span class="empty">★</span><span class="empty">★</span></div>
@@ -280,10 +290,10 @@
     </div></div>
     </div>
     <div class="year-section">
-      <div class="year-heading">2024</div>
+      <div class="year-heading">2024<span class="year-count">16 books</span></div>
       <div class="books-grid">
     <div class="book">
-      <div class="no-cover">Believe: The Untold Story Behind Ted Lasso</div>
+      <img class="book-cover" src="/images/books/believe-the-untold-story-behind-ted-lasso-jeremy-egner.jpg" alt="Believe: The Untold Story Behind Ted Lasso cover" loading="lazy">
       <div class="book-title">Believe: The Untold Story Behind Ted Lasso</div>
       <div class="book-author">Jeremy Egner</div>
       <div class="book-rating" aria-label="5 out of 5">★★★★★</div>
@@ -295,7 +305,7 @@
       <div class="book-rating" aria-label="5 out of 5">★★★★★</div>
     </div>
     <div class="book">
-      <div class="no-cover">The New House</div>
+      <img class="book-cover" src="/images/books/the-new-house-tess-stimson.jpg" alt="The New House cover" loading="lazy">
       <div class="book-title">The New House</div>
       <div class="book-author">Tess Stimson</div>
       <div class="book-rating" aria-label="4 out of 5">★★★★<span class="empty">★</span></div>
@@ -380,7 +390,7 @@
     </div></div>
     </div>
     <div class="year-section">
-      <div class="year-heading">2023</div>
+      <div class="year-heading">2023<span class="year-count">9 books</span></div>
       <div class="books-grid">
     <div class="book">
       <img class="book-cover" src="/images/books/just-the-nicest-couple-mary-kubica.jpg" alt="Just the Nicest Couple cover" loading="lazy">
