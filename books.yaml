@@ -5,6 +5,10 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: "Character Limit: How Elon Musk Destroyed Twitter"
+    author: Kate Conger and Ryan Mac
+    rating: 4
+    year: 2026
   - title: Careless People
     author: Sarah Wynn-Williams
     rating: 4
@@ -51,6 +55,7 @@ books:
     rating: 4
     year: 2025
   - title: The Night of the Crash
+    author: Jessica Irena Smith
     rating: 4
     year: 2025
   - title: Startupland
@@ -58,6 +63,7 @@ books:
     rating: 4
     year: 2025
   - title: The Cabin in the Woods
+    author: Sarah Alderson
     rating: 3
     year: 2025
   - title: The Making of a Manager
