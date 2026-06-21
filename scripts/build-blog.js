@@ -190,9 +190,9 @@ function renderIndex(posts) {
     : `<ul class="posts-list">${posts.map(p => `
           <li class="post-item">
             <div class="post-date">${formatDate(p.date)}</div>
-            <h2 class="post-title"><a href="${escapeHtml(p.slug)}/">${escapeHtml(p.title)}</a></h2>
+            <h2 class="post-title"><a href="/my-thoughts/${escapeHtml(p.slug)}/">${escapeHtml(p.title)}</a></h2>
             ${p.summary ? `<p class="post-excerpt">${escapeHtml(p.summary)}</p>` : ''}
-            <a href="${escapeHtml(p.slug)}/" class="read-more">Read more</a>
+            <a href="/my-thoughts/${escapeHtml(p.slug)}/" class="read-more">Read more</a>
           </li>`).join('')}
       </ul>`;
 
