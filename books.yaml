@@ -5,6 +5,14 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: Feel-Good Productivity
+    author: Ali Abdaal
+    rating: 4
+    year: 2026
+  - title: The Perfect Lie
+    author: Jo Spain
+    rating: 3.5
+    year: 2026
   - title: "Character Limit: How Elon Musk Destroyed Twitter"
     author: Kate Conger and Ryan Mac
     rating: 4
