@@ -279,6 +279,11 @@ const BOOKS_STYLES = `
     font-size: 0.9rem; color: darkorange; letter-spacing: 1px;
   }
   .book-rating .empty { color: #333; }
+  .book-rating .half { position: relative; color: #333; }
+  .book-rating .half::before {
+    content: '★'; position: absolute; left: 0; top: 0;
+    width: 50%; overflow: hidden; color: darkorange;
+  }
   .no-cover {
     width: 100%; aspect-ratio: 2 / 3; background: #1a1a1a;
     border-radius: 4px; display: flex; align-items: center; justify-content: center;
@@ -296,10 +301,14 @@ function slugifyBook(title, author) {
 }
 
 function starHtml(rating) {
-  const r = Math.max(0, Math.min(5, Math.round(rating || 0)));
+  const r = Math.max(0, Math.min(5, rating || 0));
+  const full = Math.floor(r);
+  const half = r - full >= 0.5;
   let html = '';
   for (let i = 0; i < 5; i++) {
-    html += i < r ? '★' : '<span class="empty">★</span>';
+    if (i < full) html += '★';
+    else if (i === full && half) html += '<span class="half">★</span>';
+    else html += '<span class="empty">★</span>';
   }
   return html;
 }
