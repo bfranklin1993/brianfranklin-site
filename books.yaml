@@ -5,6 +5,10 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: How Economics Explains the World
+    author: Andrew Leigh
+    rating: 4
+    year: 2026
   - title: Feel-Good Productivity
     author: Ali Abdaal
     rating: 4
