@@ -5,6 +5,10 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: The Thursday Murder Club
+    author: Richard Osman
+    rating: 4.5
+    year: 2026
   - title: How Economics Explains the World
     author: Andrew Leigh
     rating: 4
