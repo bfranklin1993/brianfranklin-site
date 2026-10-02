@@ -5,6 +5,14 @@ page:
 # Rating scale: 1–5. Year = when I finished it.
 books:
   # 2026
+  - title: Artemis
+    author: Andy Weir
+    rating: 5
+    year: 2026
+  - title: Dr. No
+    author: Ian Fleming
+    rating: 4
+    year: 2026
   - title: One in Three
     author: Tess Stimson
     rating: 3.5
