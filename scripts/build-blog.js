@@ -279,7 +279,7 @@ const BOOKS_STYLES = `
     font-size: 0.9rem; color: darkorange; letter-spacing: 1px;
   }
   .book-rating .empty { color: #333; }
-  .book-rating .half { position: relative; color: #333; }
+  .book-rating .half { position: relative; display: inline-block; color: #333; }
   .book-rating .half::before {
     content: '★'; position: absolute; left: 0; top: 0;
     width: 50%; overflow: hidden; color: darkorange;
